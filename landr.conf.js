@@ -1,5 +1,5 @@
 module.exports = {
-	theme: 'theme/landr-theme-fin',
+  theme: 'theme/landr-theme-fin',
 	settings: {
 		title: 'balenaEtcher',
 		lead: 'Flash. Flawless.',

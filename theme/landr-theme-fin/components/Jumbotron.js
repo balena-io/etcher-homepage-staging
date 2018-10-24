@@ -5,21 +5,52 @@ import get from 'lodash/get';
 import { Heading, Banner, Image, Flex, Link, DropDownButton } from 'resin-components';
 import DownloadButton from './DownloadButton'
 import background from '../images/red-background.svg';
-import imagePic from '../images/etcherImg/image.svg'
-import drivePic from '../images/etcherImg/drive.svg'
-import flashPic from '../images/etcherImg/flash.svg'
+import stepsGif from '../images/etcherImg/steps.gif'
 import arrowPic from '../images/etcherImg/arrow.svg'
 
-const gifHeading = styled(Heading.h5)`
-  transition: color 3s;
-  color: #fff;
+const DownloadFlex = styled(Flex) `
+  div.download-etcher {
+    width: 260px;
+    background: #a5de37;
+    borderColor: #a5de37;
+  }
+  div.download-etcher-cli {
+    margin-left: 15px;
+    width: 278px;
+    background: transparent;
+    borderColor: #a5de37;
+  }
+
+  button.download-etcher {
+    color: #172c3d;
+  }
+  button.download-etcher-cli {
+    color: #ffffff;
+  }
+
+  div.download-button,
+  button.download-button:first-child {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    padding-right: 0;
+  }
+  div.download-button,
+  button.download-button:nth-child(2) {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+
+  button.download-button:first-child {
+    width: calc(100% - 42px)
+  }
+  button.download-button:nth-child(2) {
+    width: 42px;
+    padding: 0;
+  }
 `
 
 export default withTheme((props) => {
   const getter = key => get(props, key);
-  const downloadAssets = [
-    { key: 'Something', type: 'sometype', name: 'somename', browser_download_url: 'www.download.com' }
-  ]
 
 	return (
 		<Banner
@@ -44,64 +75,23 @@ export default withTheme((props) => {
 				</Heading.h2>	
 			</Flex>
 
-      <Flex alignItems='center' justifyContent='center' style={{ backgroundColor: '#3F617D', padding: '50px 26px', margin: '50px auto' }} >
-        <Flex direction='column' >
-          <Image src={imagePic} />
-          <Heading.h5 color='#fff' mt={16} align='center'>Select image</Heading.h5>
-        </Flex>
-        <Flex mx={25}>
-          <Image src={arrowPic} />
-        </Flex>
-        <Flex direction='column' mx={25}>
-          <Image src={drivePic} />
-          <Heading.h5 color='#325069' mt={16} align='center'>Select drive</Heading.h5>
-        </Flex>
-        <Flex mx={25}>
-          <Image src={arrowPic} />
-        </Flex>
-        <Flex direction='column' mx={25}>
-          <Image src={flashPic} />
-          <Heading.h5 color='#325069' mt={16} align='center'>Flash!</Heading.h5>
-        </Flex>
+      <Flex alignItems='center' justifyContent='center' style={{ backgroundColor: '#3F617D', margin: '50px', width: '589px', height: '132px' }} >
+        <Image src={stepsGif}/>
 			</Flex>
       
-      <Flex direction='row' justifyContent='center' alignItems='center'>
-        <DownloadButton 
-          mx={2} 
-          color='#172c3d' 
-          background='#a5de37' 
-          borderColor='#a5de37' 
-          releases={props.settings.releases}
-          width='210px'
-        >
-        {
-          props.settings.releases.map((asset, index) => (
-            <Link href={asset.href} color='#2a506f'>{asset.text}</Link>
-          ))   
-        }
-        </DownloadButton>
+      <DownloadFlex direction='row' id='download-flex' justifyContent='center' alignItems='center'>
+        <DownloadButton
+          className='download-button download-etcher'
+          releases={props.settings.releases}/>
 
-        <DownloadButton 
-          mx={2} 
-          color='white' 
-          background='transparent' 
-          borderColor='#a5de37' 
-          label='Install experimental CLI'
+        <DownloadButton
+          className='download-button download-etcher-cli'
+          label={<span>Install experimental CLI</span>}
           releases={props.settings.cliDownloads}
+          outline
           whiteCaretStyle
-          width='210px'
-          
-        >
-          {
-            props.settings.cliDownloads.map((asset) => (
-              <Link href={asset.href} color='#2a506f' blank>{asset.text}</Link>
-            ))
-          }
-        </DownloadButton>
-
-        
-        
-      </Flex>
+        />
+      </DownloadFlex>
 		</Banner>
 	);
 });

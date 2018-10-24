@@ -13,11 +13,14 @@
   "author": "Resin Inc. <hello@etcher.io>",
   "license": "ISC",
   "dependencies": {
+    "arch": "^2.1.1",
     "landr": "^2.3.0",
+    "lodash": "^4.17.11",
     "rendition": "^4.29.2",
     "styled-components": "^3.4.9"
   },
   "devDependencies": {
-    "babel-plugin-webpack-alias": "^2.1.2"
+    "babel-plugin-webpack-alias": "^2.1.2",
+    "file-loader": "^2.0.0"
   }
 }
